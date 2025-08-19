@@ -1,0 +1,53 @@
+# ===== .gitignore =====
+# Dependencies
+node_modules/
+client/node_modules/
+
+# Production builds
+client/build/
+dist/
+
+# Environment files
+.env
+.env.local
+.env.production
+
+# Database
+database/*.db
+database/*.db-journal
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Backups
+*.backup
+*.bak
+
+# Temporary files
+tmp/
+temp/
