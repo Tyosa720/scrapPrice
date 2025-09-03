@@ -38,7 +38,11 @@ export const productAPI = {
   deleteProduct: (id) => api.delete(`/products/${id}`),
 
   // Supprimer une URL d’un produit
-  deleteProductUrl: (productId, urlId) => api.delete(`/products/${productId}/urls/${urlId}`)
+  deleteProductUrl: (productId, urlId) => api.delete(`/products/${productId}/urls/${urlId}`),
+
+  // Scraper les infos d’un produit depuis son URL (auto-complete)
+  scrapeUrl: (url) => api.get('/scrape-url', { params: { url } }),
+
 };
 
 export default api;

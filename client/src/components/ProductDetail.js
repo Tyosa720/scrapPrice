@@ -13,7 +13,6 @@ const ProductDetail = () => {
   
   const [urlForm, setUrlForm] = useState({
     url: '',
-    selector: ''
   });
 
   useEffect(() => {
@@ -57,7 +56,7 @@ const ProductDetail = () => {
 
     try {
       await productAPI.addProductUrl(id, urlForm);
-      setUrlForm({ url: '', selector: '' });
+      setUrlForm({ url: ''});
       setShowAddUrl(false);
       loadProductData();
     } catch (err) {
@@ -111,6 +110,18 @@ const ProductDetail = () => {
     } catch (err) {
       console.error("Erreur suppression URL:", err);
       alert("Erreur lors de la suppression de l'URL");
+    }
+  };
+    // Supprimer un produit
+  const handleDeleteProduct = async (productId) => {
+    if (!window.confirm("Voulez-vous vraiment supprimer ce produit ?")) return;
+
+    try {
+      await productAPI.deleteProduct(productId);
+      window.location.href = '/';
+    } catch (err) {
+      console.error("Erreur suppression produit:", err);
+      alert("Erreur lors de la suppression du produit");
     }
   };
   if (loading) {
@@ -211,6 +222,12 @@ const ProductDetail = () => {
                     <span>Scanner maintenant</span>
                   </>
                 )}
+              </button>
+              <button
+                  onClick={() => handleDeleteProduct(product.id)}
+                  className="px-6 py-4 bg-red-100 hover:bg-red-200 text-red-600 text-sm font-medium rounded-lg transition-colors duration-200"
+                >
+                  ❌
               </button>
             </div>
           </div>
@@ -381,22 +398,6 @@ const ProductDetail = () => {
                         required
                       />
                     </div>
-                    <div>
-                      <label htmlFor="selector" className="block text-sm font-medium text-slate-700 mb-2">
-                        Sélecteur CSS personnalisé (optionnel)
-                      </label>
-                      <input
-                        id="selector"
-                        type="text"
-                        placeholder=".price, span[data-price], #price-display"
-                        value={urlForm.selector}
-                        onChange={(e) => setUrlForm({...urlForm, selector: e.target.value})}
-                        className="block w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
-                      />
-                      <p className="text-sm text-slate-500 mt-1">
-                        Spécifiez un sélecteur CSS pour cibler précisément l'élément contenant le prix.
-                      </p>
-                    </div>
                     <div className="flex items-center space-x-3">
                       <button
                         type="submit"
@@ -454,12 +455,6 @@ const ProductDetail = () => {
                           >
                             {url.url}
                           </a>
-                          {url.selector && (
-                            <div className="mt-2">
-                              <span className="text-xs text-slate-500">Sélecteur personnalisé:</span>
-                              <code className="ml-2 px-2 py-1 bg-slate-100 text-slate-800 rounded text-xs">{url.selector}</code>
-                            </div>
-                          )}
                           <div className="text-xs text-slate-500 mt-2">
                             Ajoutée le {formatDate(url.created_at)}
                           </div>

@@ -56,18 +56,6 @@ const ProductList = () => {
       minute: '2-digit'
     });
   };
-  // Supprimer un produit
-  const handleDeleteProduct = async (productId) => {
-    if (!window.confirm("Voulez-vous vraiment supprimer ce produit ?")) return;
-
-    try {
-      await productAPI.deleteProduct(productId);
-      loadProducts();
-    } catch (err) {
-      console.error("Erreur suppression produit:", err);
-      alert("Erreur lors de la suppression du produit");
-    }
-  };
 
   const filteredProducts = products.filter(product =>
     product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -242,18 +230,10 @@ const ProductList = () => {
                     {Boolean(product.is_promotion) && (
                       <div className="absolute top-4 right-4">
                         <div className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-3 py-1 rounded-full text-xs font-bold animate-pulse">
-                           PROMO
+                          🔥  PROMO
                         </div>
                       </div>
                     )}
-                    <div className='flex justify-end'>
-                      <button
-                          onClick={() => handleDeleteProduct(product.id)}
-                          className="px-3 py-2 bg-red-100 hover:bg-red-200 text-red-600 text-sm font-medium rounded-lg transition-colors duration-200"
-                        >
-                          ❌
-                      </button>
-                    </div>
                     <h3 className="text-lg font-bold text-slate-800 mb-2 pr-16 group-hover:text-blue-600 transition-colors">
                       {product.name}
                     </h3>
