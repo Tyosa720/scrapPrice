@@ -24,7 +24,7 @@ class PriceScraper {
 
         db.all('SELECT * FROM product_urls WHERE product_id = ?', [productId], async (err, urls) => {
           if (err) return reject(err);
-          if (!urls.length) return reject(new Error('Aucune URL trouvée pour ce produit'));
+          if (!urls.length) return;
 
           const results = [];
 
@@ -62,7 +62,7 @@ class PriceScraper {
       const lastPrice = await this.getLastPrice(urlData.id);
       await this.savePrice(product.id, urlData.id, price, scrapedName);
 
-      const isPromotion = lastPrice && price < lastPrice;
+      const isPromotion = price < lastPrice;
       if (isPromotion) {
         console.log(`🎉 Promo détectée ! ${product.name}: ${lastPrice}€ → ${price}€`);
         await discord.sendPriceAlert(product.name, price, lastPrice, urlData.url);
