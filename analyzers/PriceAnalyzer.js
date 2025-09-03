@@ -1,4 +1,3 @@
-// ===== analyzers/PriceAnalyzer.js =====
 const { normalizePrice, calculateDiscount } = require('../utils/PriceUtils');
 
 class PriceAnalyzer {

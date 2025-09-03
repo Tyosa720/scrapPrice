@@ -1,4 +1,3 @@
-// ===== services/discord.js =====
 const axios = require('axios');
 
 class DiscordNotifier {

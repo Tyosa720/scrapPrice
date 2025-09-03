@@ -1,4 +1,3 @@
-// ===== utils/PriceUtils.js =====
 function normalizePrice(price, referencePrice = null) {
   if (price === undefined || price === null) return null;
 

@@ -1,8 +1,3 @@
-// ===== services/extractors/utils.js =====
-/**
- * Transforme un texte contenant un prix en nombre float
- * Exemple : "399,99 €" → 399.99
- */
 function parsePrice(text) {
   if (!text) return null;
 
